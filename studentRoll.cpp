@@ -58,7 +58,6 @@ StudentRoll::~StudentRoll() {
     {
       Node* n = curr->next;
       delete curr;
-      curr = n;
     }
   delete head;
   head = nullptr;
