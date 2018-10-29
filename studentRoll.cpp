@@ -54,9 +54,9 @@ StudentRoll::StudentRoll(const StudentRoll &orig) {
 
 StudentRoll::~StudentRoll() {
   Node* curr = head;
-  while(head != nullptr)
+  while(curr != nullptr)
     {
-      Node* n = curr->next;
+      curr = curr->next;
       delete curr;
     }
   delete head;
@@ -85,7 +85,7 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
     }
   head = nullptr;
   Node* curr = right.head;
-  if (curr = nullptr)
+  if (curr == nullptr)
     {
       return *this;
     }
