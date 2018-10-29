@@ -4,6 +4,9 @@
 #include <sstream>
 
 Student::Student(const char * const name, int perm) {
+  this->perm = 0;
+  this->name = NULL;
+  
   this->setName(name);
   this->setPerm(perm);
 }
@@ -17,22 +20,30 @@ const char * const Student::getName() const {
 }
 
 void Student::setPerm(const int permNumber) {
-  this->perm = permNumber;
+  perm = permNumber;
 }
 
 void Student::setName(const char * const name) {
+  if (this->name)
+    {
+      delete[] this->name;
+      this->name = NULL;
+    }
   this->name = new char[strlen(name)+1];
   strcpy(this->name,name);
 }
 
 
 Student::Student(const Student &orig) {
-  this->setName(orig.name);
-  this->setPerm(orig.perm);
+  this->name = NULL;
+  this->perm = 0;
+  this->setName(orig.getName());
+  this->setPerm(orig.getPerm());
 }
 
 Student::~Student() {
-  delete name;
+  delete [] this->name;
+  this->name = NULL;
 }
 
 Student & Student::operator=(const Student &right) {
@@ -43,11 +54,12 @@ Student & Student::operator=(const Student &right) {
   if (&right == this) 
     return (*this);
 
-  // TODO... Here is where there is code missing that you need to 
-  // fill in...
+  delete[] this->name;
+  this->name = 0; 
   this->setName(right.name);
   this->setPerm(right.perm);
 
+  
   // KEEP THE CODE BELOW THIS LINE
   // Overloaded = should end with this line, despite what the textbook says.
   return (*this); 
